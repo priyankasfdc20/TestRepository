@@ -1,0 +1,2 @@
+/usr/lib/jvm/java-11-amazon-corretto.x86_64:11:0:7:64:true:1590686854000
+/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-2.amzn2.0.1.x86_64/jre:1:8:0:64:false:1588366914000

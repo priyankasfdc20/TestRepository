@@ -1,0 +1,1141 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+html,button,input,select,textarea {
+	color:#222;
+}
+
+html {
+	font-size:1em;
+	line-height:1.4;
+}
+
+::-moz-selection {
+	background:#b3d4fc;
+	text-shadow:none;
+}
+
+::selection {
+	background:#b3d4fc;
+	text-shadow:none;
+}
+
+hr {
+	display:block;
+	height:1px;
+	border:0;
+	border-top:1px solid #ccc;
+	margin:1em 0;
+	padding:0;
+}
+
+audio,canvas,img,video {
+	vertical-align:middle;
+}
+
+fieldset {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+textarea {
+	resize:vertical;
+}
+
+.browsehappy {
+	margin:.2em 0;
+	background:#ccc;
+	color:#000;
+	padding:.2em 0;
+}
+
+@font-face {
+    font-family: AmazonEmber;
+    src: url(fonts/AmazonEmber_Bd.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: AmazonEmber;
+    src: url(fonts/AmazonEmber_Lt.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: AmazonEmber;
+    src: url(fonts/AmazonEmber_Md.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: AmazonEmber;
+    src: url(fonts/AmazonEmber_Rg.ttf);
+    font-weight: 400;
+}
+
+/* navbar */
+
+.navbar-logo img {
+    height: 28px;
+    margin-top: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-right img {
+    height: 25px;
+    margin-top: -4px;
+    margin-left: 8px;
+    margin-right: 15px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #243040;
+    font-weight: 400;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color:#ce453d;
+}
+
+/* navbar */
+
+/* banner */
+
+.banner
+{
+    position: relative;
+}
+
+.banner img
+{
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.banner .banner-text
+{
+    position: absolute;
+    left: 20px;
+    top: 60px;
+    width: 50%;
+    color:#243040;
+}
+
+.banner h2
+{
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.banner p
+{
+    margin-bottom: 20px;
+}
+
+.banner a
+{
+    text-decoration: none;
+    cursor: pointer;
+    color:#243040;
+}
+
+.banner a:hover
+{
+    color:#ce453d;
+}
+
+#show-video {
+    height: 40px;
+    line-height: 40px;
+}
+
+#show-video .show-video-title
+{
+    font-weight: 400;
+    font-size: 20px;
+    vertical-align: text-bottom;
+    line-height: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+#show-video .glyphicon
+{
+    font-size: 40px;
+    color:#ce453d;
+}
+
+@media only screen and (max-width: 780px) {
+    .banner
+    {
+        margin-top: 0px !important;
+    }
+
+    .banner img
+    {
+        display: none;
+    }
+
+    .banner .banner-text
+    {
+        position: initial;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        width: 95%;
+    }
+}
+
+@media only screen and (max-height: 1070px) {
+    .banner
+    {
+        margin-top: -50px;
+    }
+
+    #platform-card-container
+    {
+        margin-top: 0px !important;
+    }
+}
+
+/* banner */
+
+/* footer */
+
+#footer {
+    background-color: #646465;
+    color: white;
+    font-size: 10pt;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#footer svg {
+    height: 20px;
+    width: 30px;
+    fill: lightgray;
+    margin-bottom: -6px;
+}
+#footer svg:hover {
+    fill: white;
+}
+
+#footer span {
+    font-size: 12px;
+    line-height: 33px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+#footer a {
+    color: lightgray;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 33px;
+    display: inline-block;
+    vertical-align: bottom;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+#footer a:visited {
+    color: lightgray;
+}
+
+#footer a {
+    color: lightgray;
+}
+
+#footer a:hover {
+    color: white;
+}
+
+#footer .rights-recerved
+{
+    float: right;
+    margin-right: 8px;
+    color: lightgray;
+}
+
+@media only screen and (max-width: 750px) {
+    #footer .rights-recerved
+    {
+        display: none;
+    }
+}
+
+/* footer */
+
+/* ===== Initializr Styles ==================================================
+   Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
+   ========================================================================== */
+.wrapper {
+	width:90%;
+	margin:0 5%;
+}
+
+/* ==============
+    MOBILE: Main
+   ============== */
+.main {
+	padding:0;
+}
+
+.main article h1 {
+	font-size:2em;
+}
+
+.main aside {
+	color:#fff;
+	padding:0 5% 10px;
+}
+
+.footer-container footer {
+	height:auto;
+}
+
+/* ===============
+    ALL: IE Fixes
+   =============== */
+.ie7 .title {
+	padding-top:20px;
+}
+
+/* ==========================================================================
+   MOBILE: Clients page styling.
+   ========================================================================== */
+body {
+    font-family: AmazonEmber, sans-serif;
+	font-weight:300;
+	font-stretch:normal;
+	font-size:12pt;
+	height:100%;
+	width:100%;
+    background-color: #F6F6F7;
+    padding-top: 50px;
+    padding-bottom: 33px;
+}
+
+h1 {
+	font-weight:100;
+	font-stretch:normal;
+	font-size:28pt;
+	}
+
+h3 {
+	font-weight:300;
+	font-stretch:normal;
+	font-size:10pt;
+}
+
+/* language selector */
+
+.lang-selector select {
+    width: 45px;
+    margin: 0;
+    background: #f8f8f8;
+    color:#243040;
+    border:none;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    line-height: 20px;
+    margin: 15px;
+}
+
+.lang-selector label {
+    position: relative;
+    display: initial;
+    max-width: 100%;
+    margin-bottom: 0px;
+    font-weight: 400;
+}
+
+.lang-selector label:after {
+    content:"\e259";
+    font:10px "Glyphicons Halflings";
+    right:25px; top:5px;
+    position:absolute;
+    pointer-events:none;
+}
+
+.lang-selector label:hover {
+    color:#ce453d;
+}
+
+/* language selector */
+
+div#platform-card-container {
+	width: 90%;
+	height:auto;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	white-space:nowrap;
+}
+
+div.platform-card {
+	display:block;
+	width:100%;
+	max-width:260px;
+	height:auto;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:5px;
+	text-align:center;
+	cursor:pointer;
+}
+
+div.platform-card.selected {
+	cursor:inherit;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.platform-card div.platform-card-contents {
+	margin:10%;
+	width:80%;
+	height:100%;
+}
+
+div.platform-card div.no-bottom-margin {
+	margin-bottom: 0px;
+}
+
+div.platform-card h3 {
+	font-weight:400;
+	color:#666;
+	white-space: normal;
+}
+
+div.platform-card img {
+	width: auto;
+	max-width:100%;
+	height: auto;
+	max-height:50px;
+}
+
+div.platform-card.selected img {
+	height: auto;
+	max-height:60px;
+}
+
+div.platform-card.selected div.details {
+	display:block;
+}
+
+div.platform-card.selected div.info{
+	visibility: visible;
+	display: inherit;
+}
+
+div.platform-card div.details {
+	display:none;
+}
+
+div.platform-card div.info{
+	padding-top: 10px;
+	padding-left: 12px;
+	padding-right: 12px;
+	visibility: hidden;
+	display: none;
+}
+
+div.platform-card div.info a{
+	font-weight: 700;
+}
+
+div.platform-card div.info p{
+	font-size: 11px;
+	white-space: normal;
+	text-align: left;
+	background: url("/img/info.png")  0 2px / 12px 12px no-repeat;
+	padding-left: 20px;
+}
+
+div.platform-card div.details.preload {
+	display: block;
+}
+
+div.platform-card:hover h3 {
+	color:#111;
+}
+
+a.download-button {
+	display:inline-block;
+	width:80%;
+	height:auto;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#ce453d;
+  color:#eee;
+  text-decoration:none;
+  font-size:10pt;
+  font-weight:400;
+}
+
+a.download-button:hover {
+	color:#fff;
+}
+
+a.download-button:active {
+	box-shadow:none;
+}
+
+div.platform-card h3.download-prompt {
+  margin-top:18px;
+  margin-bottom: 0px;
+}
+
+div.platform-card a.latest-download-button {
+  display:inline-block;
+  width:80%;
+  height:auto;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:5px;
+  margin-bottom:0px;
+  padding:0px;
+  background-color:#ce453d;
+  color:#eee;
+  text-decoration:none;
+  font-size:10pt;
+  font-weight:400;
+}
+
+div.platform-card a.latest-download-button:hover {
+  color:#fff;
+}
+
+div.platform-card a.latest-download-button:active {
+  box-shadow:none;
+}
+
+div.platform-card a.old-download-button {
+  display:inline-block;
+  width:80%;
+  height:auto;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:5px;
+  margin-bottom:0px;
+  background-color:#fff;
+  color:#545B64;
+  text-decoration:none;
+  font-size:10pt;
+  font-weight:400;
+}
+
+div.platform-card a.old-download-button:hover {
+  color:#16191F;
+}
+
+div.platform-card a.old-download-button:active {
+  box-shadow:none;
+}
+
+div.platform-card a.release-notes {
+  display: block;
+  margin-top:5px;
+  font-size:11px;
+  font-weight: 700;
+}
+
+a.install-button {
+	display:inline-block;
+	width:80%;
+	height:auto;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#ce453d;
+	color:#eee;
+	text-decoration:none;
+    font-size:10pt;
+    font-weight:400;
+}
+
+a.install-button:hover {
+	color:#fff;
+}
+
+a.install-button:active {
+	box-shadow:none;
+}
+
+div#workspaces-video {
+	position:absolute;
+	top:100px;
+	left:50%;
+	width:210px;
+	height:120px;
+	margin-left:-105px;
+	box-shadow:0 0 20px -4px #000;
+	display:none;
+}
+
+div#workspaces-video iframe {
+	z-index:1;
+	width:100%;
+	height:100%;
+}
+
+a#close-video {
+	z-index:3;
+	display:block;
+	width:30px;
+	height:30px;
+	float:right;
+	position:absolute;
+	top:-14px;
+	right:-14px;
+}
+
+a#close-reg {
+	z-index:3;
+	display:block;
+	width:30px;
+	height:30px;
+	float:right;
+	position:absolute;
+	top:-14px;
+	right:-14px;
+}
+
+div#registration-code-message {
+	display:none;
+	background-color:#fff;
+	position:fixed;
+	height:auto;
+	top:100px;
+	left:50%;
+	width:260px;
+	padding:10px;
+	margin-left:-140px;
+	box-shadow:0 0 20px -4px #000;
+	text-align:center;
+	font-size:20pt;
+	line-height:22pt;
+}
+
+div#registration-code-message div {
+	font-family:"HelveticaNeue-UltraLight","Helvetica Neue UltraLight","HelveticaNeue-Light","HelveticaNeue","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+	font-weight:100;
+	font-size:80%;
+	line-height:105%;
+	margin:5px;
+}
+
+div#registration-code-details span {
+	display:block;
+	font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+	font-weight:300;
+	font-stretch:normal;
+	font-size:70%;
+	margin-top:10px;
+	margin-bottom:10px;
+	color:gray;
+}
+
+div#registration-code-details input {
+	display:block;
+	border:1px solid #ddd;
+	width:auto;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	margin-bottom:0;
+	font-size:90%;
+	font-family: "HelveticaNeueUltraLight", "HelveticaNeue-Ultra-Light", "Helvetica Neue Ultra Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Arial", sans-serif;
+	font-weight:100;
+	font-stretch:normal;
+}
+
+div#registration-code-message a#re-download {
+	display:block;
+	margin-top:10px;
+	font-size:40%;
+	color:gray;
+	text-decoration:none;
+	text-align:center;
+}
+
+div#registration-code-message a#re-download:hover {
+	color:#000;
+}
+
+div.main.wrapper.clearfix.narrow {
+	background-size:90%;
+}
+div#terms {
+	width:90%;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div#terms h3 {
+	font-weight:200;
+	font-size:14pt;
+	text-align:center;
+}
+
+div#terms p {
+	font-size: 8pt;
+	text-align:justify;
+}
+
+div#release-notes-container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#platform-links {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+div#platform-links a {
+	font-size: 10pt;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-decoration: none;
+	color: #666666;
+}
+
+div#platform-links a:hover {
+	color: #333333;
+}
+
+div.release-platform {
+	font-size: 16pt;
+	text-align: center;
+}
+
+div.release-notes-card {
+	margin-bottom: 40px;
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 20px;
+	background-color: #fff5e2;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+div.release-notes-card hr {
+	 border: 0;
+	 height: 1px;
+	 background: #ffda8a;
+}
+
+h3.release-title {
+	font-size: 10pt;
+}
+
+div.release-notes-card ul {
+	list-style-position: inside;
+	padding: 0px;
+}
+
+
+div.release-notes-card ul li {
+	font-size: 8pt;
+	line-height: 12pt;
+	text-indent: -10px;
+	padding-left: 10px;
+	list-style-type: none;
+	margin-bottom: 4px;
+}
+
+div.release-notes-card ul li:before {
+	content: "âˆ™";
+	margin-right: 6px;
+}
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media only screen and (min-width: 480px) {
+
+	/* ========================
+      INTERMEDIATE: Clients Page Styling
+    ======================== */
+	div.main.wrapper.clearfix {
+		background-position:center -40px;
+	}
+
+	div#platform-card-container {
+		width:40%;
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	div.platform-card img {
+		height: auto;
+		max-height:70px;
+	}
+
+	div#workspaces-video {
+		width:426px;
+		height:240px;
+		margin-left:-213px;
+	}
+	div#terms p {
+		font-size: 9pt;
+	}
+
+	h3.release-title {
+		font-size: 12pt;
+	}
+
+	div.release-notes-card ul li {
+		font-size: 10pt;
+		line-height: 13pt;
+	}
+
+}
+
+@media only screen and (min-width: 768px) {
+	/* ====================
+	    WIDE: CSS3 Effects
+	   ==================== */
+	.header-container,.main aside {
+		-webkit-box-shadow:0 5px 10px #aaa;
+		-moz-box-shadow:0 5px 10px #aaa;
+		box-shadow:0 5px 10px #aaa;
+	}
+
+	/* ============
+	    WIDE: Main
+	   ============ */
+	.main article {
+		float:left;
+		width:57%;
+	}
+
+	.main aside {
+		float:right;
+		width:28%;
+	}
+
+	/* ===================
+	    WIDE: Clients Page Styling
+	   =================== */
+
+	div#platform-card-container {
+		margin-top:10px;
+		width:100%;
+		height:auto;
+		position:inherit;
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	div.platform-card img {
+		height: auto;
+		max-height:50px;
+		width: auto;
+		max-width:80%;
+	}
+
+	div.platform-card {
+		width:14%;
+		height:auto;
+		display:inline-block;
+		position:inherit;
+		top:inherit;
+		left:inherit;
+		margin-left:inherit;
+		vertical-align:top;
+		padding-top:40px;
+		padding-bottom:40px;
+	}
+
+	div.platform-card.selected {
+		height:auto;
+		top:inherit;
+		left:inherit;
+		margin-left:inherit;
+		padding-top:0;
+		padding-bottom:0;
+	}
+
+	div.platform-card.selected img {
+		width: auto;
+		max-width:90%;
+		height: auto;
+		max-height:60px;
+	}
+
+	div.platform-card div.info p{
+		background: url("/img/info@2x.png")  0 2px / 12px 12px no-repeat;
+	}
+
+	div.platform-card div.platform-card-contents {
+		vertical-align:middle;
+		height:auto;
+	}
+
+	div.main.wrapper.clearfix {
+		background-position:center -80px;
+		background-size:80%;
+	}
+
+	div#workspaces-video {
+		margin-top:-240px;
+		margin-left:-350px;
+		width:700px;
+		height:394px;
+		position:fixed;
+		top:50%;
+		left:50%;
+	}
+
+	div#workspaces-video iframe {
+		width:700px;
+		height:394px;
+	}
+
+	div#registration-code-message {
+		width:520px;
+		padding:20px;
+		margin-left:-270px;
+		font-size:24pt;
+	}
+
+	div#registration-code-message div#registration-code-details input#registration-code-input {
+		font-size:28pt;
+	}
+
+	div.main.wrapper.clearfix.narrow {
+		background-size: 450px;
+		background-position: center -40px;
+	}
+	div#terms p {
+		font-size: 10pt;
+	}
+
+	div.footer-container {
+		padding-bottom: 10px;
+	}
+
+	div.footer-container footer {
+		width: 55%;
+		max-width: 800px;
+	}
+	div#release-notes-container {
+		max-width: 60%;
+	}
+
+	h3.release-title {
+		font-size: 14pt;
+	}
+
+	div.release-notes-card ul li {
+		font-size: 12pt;
+		line-height: 16pt;
+	}
+}
+
+@media only screen and (min-width: 1140px) {
+	/* ===============
+	    Maximal Width
+	   =============== */
+	.wrapper {
+		width: 1148px;
+		margin:0 auto;
+	}
+
+	div.platform-card {
+		width:14%;
+	}
+
+	div.platform-card div.info p{
+		background: url("/img/info@3x.png")  0 2px / 12px 12px no-repeat;
+	}
+
+	div.main.wrapper.clearfix {
+		background-position:center -110px;
+	}
+
+	footer {
+		width: 60%;
+	}
+
+	#footer-right a {
+		margin:0 0 0 10px;
+	}
+
+	div#workspaces-video {
+		margin-left:-450px;
+		width:900px;
+		height: 506px
+	}
+
+	div#workspaces-video iframe {
+		width:900px;
+		height:506px;
+	}
+
+}
+
+@media only screen and (min-width: 1440px) {
+	div#platform-card-container {
+		width:1296px;
+	}
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+.ir {
+	background-color:transparent;
+	border:0;
+	overflow:hidden;
+	*text-indent:-9999px;
+}
+
+.ir:before {
+	content:"";
+	display:block;
+	width:0;
+	height:150%;
+}
+
+.hidden {
+	display:none!important;
+	visibility:hidden;
+}
+
+.visuallyhidden {
+	border:0;
+	clip:rect(0 0 0 0);
+	height:1px;
+	margin:-1px;
+	overflow:hidden;
+	padding:0;
+	position:absolute;
+	width:1px;
+}
+
+.visuallyhidden.focusable:active,.visuallyhidden.focusable:focus {
+	clip:auto;
+	height:auto;
+	margin:0;
+	overflow:visible;
+	position:static;
+	width:auto;
+}
+
+.invisible {
+	visibility:hidden;
+}
+
+.clearfix:before,.clearfix:after {
+	content:" ";
+	display:table;
+}
+
+.clearfix:after {
+	clear:both;
+}
+
+.clearfix {
+	*zoom:1;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+@media print {
+	* {
+		background:transparent!important;
+		color:#000!important;
+		box-shadow:none!important;
+		text-shadow:none!important;
+	}
+
+	a,a:visited {
+		text-decoration:underline;
+	}
+
+	a[href]:after {
+		content:" (" attr(href) ")";
+	}
+
+	abbr[title]:after {
+		content:" (" attr(title) ")";
+	}
+
+	.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after {
+		content:"";
+	}
+
+	pre,blockquote {
+		border:1px solid #999;
+		page-break-inside:avoid;
+	}
+
+	thead {
+		display:table-header-group;
+	}
+
+	tr,img {
+		page-break-inside:avoid;
+	}
+
+	img {
+		max-width:100%!important;
+	}
+
+	@page {
+		margin:.5cm;
+	}
+
+	p,h2,h3 {
+		orphans:3;
+		widows:3;
+	}
+
+	h2,h3 {
+		page-break-after:avoid;
+	}
+}
+v•ü‹      ^ëÍ^ëÍAÎ‹í^ëåO   2    :https://clients.amazonworkspaces.com/css/main.css strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Content-Type: text/css
+Content-Length: 17564
+Last-Modified: Mon, 08 Jun 2020 21:56:43 GMT
+Accept-Ranges: bytes
+ETag: "801a3f48368179a344608388593d1e20"
+Date: Thu, 18 Jun 2020 18:59:20 GMT
+Via: 1.1 9046e5a276a05e60ee34c8475e92b8e7.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: rJEkDX6tlwfjyEf_Ra9_XbzG_StYgtU4eJq1xXtuCsax0RS-FG0NDA==
+Age: 74128
+x-amz-server-side-encryption: AES256
+Server: AmazonS3
+X-Cache: Hit from cloudfront
+X-Amz-Cf-Pop: SEA19-C2
+ original-response-headers Content-Type: text/css
+Content-Length: 17564
+Connection: keep-alive
+Last-Modified: Mon, 08 Jun 2020 21:56:43 GMT
+x-amz-server-side-encryption: AES256
+Accept-Ranges: bytes
+Server: AmazonS3
+Date: Wed, 17 Jun 2020 01:08:54 GMT
+ETag: "801a3f48368179a344608388593d1e20"
+X-Cache: Hit from cloudfront
+Via: 1.1 29e43d3fc91041015ce0bbd989334a34.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: HIO51-C1
+X-Amz-Cf-Id: _2ypm1hecV2q4JOhrUIouXWoz1iPjJaDv7xoxLJGGd2RwJK5skwqGw==
+Age: 86937
+ ctid 5 eTLD1Access 1;0;1645175795, uncompressed-len 0 net-response-time-onstart 125 net-response-time-onstop 127 necko:classified 1   Dœ

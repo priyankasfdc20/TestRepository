@@ -1,0 +1,7 @@
+[user]
+	name = priya
+	email = priyanka.gaddam@osi.ca.gov
+[color]
+	ui = true
+	status = auto
+	branch = auto

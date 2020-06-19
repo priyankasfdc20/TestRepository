@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+<head>
+	<meta charset="utf-8">
+	<title>Working with Git on Linux &nbsp;&bull;&nbsp; Beanstalk Guides</title>
+	<link rel="canonical"                            href="http://guides.beanstalkapp.com/version-control/git-on-linux.html">
+	<meta itemprop="articleSection"                  content="Version Control">
+	<meta name="description" itemprop="description"  content="Using Linux and new to Git? This article will help you get up and running quickly.">
+	<meta name="viewport"                            content="width=940">
+
+	<!--[if lt IE 9]><script src="../javascripts/html5shiv.js"></script><![endif]-->
+
+	<link rel="stylesheet" href="../stylesheets/global.css" media="all">
+
+	<!--[if IE 8]><link rel="stylesheet" href="../stylesheets/ie8.css" media="all"><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" href="../stylesheets/ie7.css" media="all"><![endif]-->
+
+	<script src="//use.typekit.net/ahh5why.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+
+	<link rel="shortcut icon" href="http://beanstalkapp.com/images/favicon.ico">
+</head>
+
+<body>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-PXZVN2"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PXZVN2');</script>
+<!-- End Google Tag Manager -->
+
+<header>
+
+	<h1><a href="../">Beanstalk Guides</a></h1>
+
+	<nav>
+		<ul>
+			<li id="n-guides">
+				<a href="../">Guides</a>
+			</li>
+			<li id="n-beanstalk">
+				<a href="http://beanstalkapp.com/">Try Beanstalk</a>
+			</li>
+		</ul>
+	</nav>
+
+</header>
+
+<div class="page">
+
+	<section id="version-control" class="first">
+		<div class="wrapper">
+
+			<article>
+				<div class="container">
+
+				<header>
+					<h1 itemprop="name">Working with Git on Linux</h1>
+				</header>
+
+				<div class="share">
+					<div class="fb-like" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="beanstalkapp" data-related="wildbit:Wildbit">Tweet</a>
+				</div>
+
+				<h2 class="toc">Table of Contents</h2>
+
+				<ul class="toc">
+					<li>
+						<a href="#installing-git">Installing Git</a>
+						<ul>
+							<li><a href="#install-source-code">Source Code</a></li>
+							<li><a href="#install-package-manager">Package Manager</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#creating-ssh-keys">Creating SSH Keys</a>
+					</li>
+					<li>
+						<a href="#check-connection">Checking your connection</a>
+					</li>
+					<li>
+						<a href="#setup-git-profile">Setting up your Git Profile</a>
+					</li>
+					<li>
+						<a href="#repository-configuration">Repository Configuration</a>
+					</li>
+					<li>
+						<a href="#gui-clients">Linux GUI Client</a>
+					</li>
+				</ul>
+
+				<div itemprop="articleBody">
+
+<p>Installing and configuring Git on Linux is a very straightforward process as Git was natively developed for the Linux platform. This guide will walk you through the steps to install and configure Git to begin developing using the Git version control system.</p>
+
+<h2 id="installing-git">Installing Git</h2>
+<p>Git can be installed using automated package management utilities such as <code class="cmd">apt</code> or <code class="cmd">yum</code>, alternatively Git can also be compiled from source code.</p>
+
+
+<h3 id="install-source-code">Source Code</h3>
+<p>Download the latest <a href="http://git-scm.com/">Git source package</a>. Once downloaded open up your terminal and change into the directory where it was downloaded, then execute these commands.</p>
+<pre class="sample"><code><span class="note"># Extract the code:</span>
+tar -xzvf git-* &amp;&amp; cd git-*
+<span class="note"># Configure the source code for compilation:</span>
+./configure
+<span class="note"># Build and install:</span>
+make &amp;&amp; make install</code></pre>
+
+
+<h3 id="install-package-manager">Package Manager</h3>
+<p>Execute the following commands to install Git, based on your distribution (as root or using sudo).</p>
+<pre class="sample"><code><span class="note"># Debian/Ubuntu:</span>
+apt-get install git-core</code></pre>
+<pre class="sample"><code><span class="note"># Red Hat/Fedora:</span>
+yum install git</code></pre>
+<p><strong>Note:</strong> Depending on your release of Red Hat / Fedora, Git may not be available in the primary repository. If installing does not succeed, use the <a href="https://fedoraproject.org/wiki/Epel">EPEL repository</a>.</p>
+
+
+
+<h2 id="creating-ssh-keys">Creating SSH Keys</h2>
+<p>In terminal execute the following commands in order to generate a key pair.</p>
+<pre class="sample"><code><span class="note"># Change into home directory:</span>
+cd ~
+<span class="note"># Generate a key pair:</span>
+ssh-keygen -t rsa</code></pre>
+<p>After entering <code class="cmd">ssh-keygen</code> you will be prompted for the location of the key pair, the default location (<kbd class="act">/home/$(whoami)/.ssh/id_rsa.pub</kbd>) is sufficient. You will also be prompted for an optional pass phrase that will be required each time the key is used, while optional, it is highly recommended to setup a strong pass phrase for the key.</p>
+<pre class="sample"><code><span class="note"># Concatenate the key:</span>
+cat ~/.ssh/id_rsa.pub</code></pre>
+<p>Now copy the key to your clipboard, your key should look like the following:</p>
+<pre class="sample"><code>ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAyyA8wePstPC69PeuHFtOwyTecByonsHFAjHbVnZ+h0dpomvLZxUtbknNj3+
+c7MPYKqKBOx9gUKV/diR/mIDqsb405MlrI1kmNR9zbFGYAAwIH/Gxt0Lv5ffwaqsz7cECHBbMojQGEz3IH3twEvDfF6cu5p
+00QfP0MSmEi/eB+W+h30NGdqLJCziLDlp409jAfXbQm/4Yx7apLvEmkaYSrb5f/pfvYv1FEV1tS8/J7DgdHUAWo6gyGUUSZ
+JgsyHcuJT7v9Tf0xwiFWOWL9WsWXa9fCKqTeYnYJhHlqfinZRnT/+jkz0OZ7YmXo6j4Hyms3RCOqenIX1W6gnIn+eQIkw==
+Mac Pro</code></pre>
+<p>In your Beanstalk account, the added <abbr title="Secure Shell">SSH</abbr> key will look like this:</p>
+<img src="git-on-linux/ssh-key-bs.png" alt="SSH Key Details in Beanstalk" class="big">
+
+
+
+<h2 id="check-connection">Checking your connection</h2>
+<p>Before trying to access your Git remote repository, check if the connection to your remote hosted Git repository works. Enter the following command in the Terminal, replacing <var>accountname</var> with your account name:</p>
+<pre class="sample"><code>ssh git@accountname.beanstalkapp.com</code></pre>
+<p>In this case, this is the URL to access Git on your Beanstalk account. If you are using another version control hosting service, the URL would be provided by them.</p>
+<p>Youâ€™ll most likely encounter a message that looks like this:</p>
+<pre class="sample"><code>The authenticity of host 'accountname.beanstalkapp.com (204.232.132.2)' can't be
+established. RSA key fingerprint is 30:9a:97:f3:19:4f:d1:6e:28:76:9e:e7:d1:df:2c:31.
+Are you sure you want to continue connecting (yes/no)?</code></pre>
+<p>You can type <code class="cmd">yes</code> and press Enter, which will add your accountâ€™s hostname <var>accountname.beanstalkapp.com</var> to a <code class="file">KNOWN_HOSTS</code> file. This step wonâ€™t need to be repeated unless your public key or your account names changes. Also, this must be done from the Terminal.</p>
+<p>If you were authenticated correctly, you will see a message similar to this one:</p>
+<pre class="sample"><code>You were successfully authenticated as [emailaddress] in accountname.beanstalkapp.com.
+You can now continue to configure your local Git profile.</code></pre>
+
+
+
+<h2 id="setup-git-profile">Setting up your Git Profile</h2>
+<p>After you have authenticated correctly by installing Git and setting up <abbr title="Secure Shell">SSH</abbr> keys, before you start using your Git repositories, you should setup your Git profile by typing following after you run Git bash in command line:</p>
+<pre class="sample"><code>git config --global user.name "Firstname Lastname"
+git config --global user.email "your_email@youremail.com"</code></pre>
+<p>In case you are using Beanstalk for version control, it would be best if your first name, last name and email address match to the ones you use in your account to avoid any conflicts.</p>
+
+
+<h2 id="v">Repository Configuration</h2>
+<p>The easiest method to create a local repository is to clone the remote. This can be accomplished by performing the following through terminal.</p>
+<pre class="sample"><code>git clone git@user.beanstalkapp.com:/repository-name.git</code></pre>
+<p>You should now have a repository directory named after your repository name. Now you can begin developing with using Git.</p>
+
+
+<h2 id="gui-clients">Linux GUI Client</h2>
+<p>Multiple Linux <abbr title="Graphical user interface">GUI</abbr> based Git clients are available, your mileage may vary and using terminal is the preferred method.</p>
+<ul>
+	<li><a href="http://live.gnome.org/giggle">Giggle</a></li>
+	<li><a href="http://www.syntevo.com/smartgit/">SmartGit</a></li>
+</ul>
+
+
+
+				</div>
+
+				<footer>
+					<div itemprop="author" itemscope itemtype="http://schema.org/Person" id="author">
+						<p>
+							<img itemprop="image" src="/images/profiles/rthompson.jpg" alt="Russ Thompson">
+							<a href="https://twitter.com/vigeek_" itemprop="url" rel="author"><span itemprop="name">Russ Thompson</span></a> is a <span itemprop="jobTitle">systems engineer</span> from <span itemprop="homeLocation">Philadelphia, PA</span>.
+						</p>
+					</div>
+
+					<div id="back">
+						<a href="../">Back to Guides</a>
+					</div>
+
+					<div class="share">
+						<div class="fb-like" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-count="none" data-via="beanstalkapp" data-related="wildbit:Wildbit">Tweet</a>
+					</div>
+				</footer>
+
+				</div>
+			</article>
+
+		</div>
+	</section>
+
+</div>
+
+<section id="support">
+	<div class="wrapper">
+	<div class="container">
+
+		<section id="bs-signup">
+			<a href="http://beanstalkapp.com/">
+				<h1>Try Beanstalk now!</h1>
+				<p>Signup and get started in minutes.</p>
+			</a>
+		</section>
+
+		<section id="bs-support">
+			<h1>Still have some questions?</h1>
+			<ul>
+				<li id="s-email">
+					<a href="mailto:support@beanstalkapp.com">Send us an email</a>
+				</li>
+				<li id="s-kb">
+					<a href="http://support.beanstalkapp.com/">Read our help articles</a>
+				</li>
+			</ul>
+		</section>
+
+	</div>
+	</div>
+</section>
+
+<footer>
+	<hr>
+
+	<ul>
+		<li><a href="http://beanstalkapp.com/requests/new">Contact</a></li>
+		<li><a href="http://blog.beanstalkapp.com/">Blog</a></li>
+		<li><a href="http://twitter.com/beanstalkapp">Twitter</a></li>
+		<li><a href="http://beanstalkapp.com/security">Security</a></li>
+		<li><a href="http://wildbit.com/privacy-policy">Privacy Policy</a></li>
+		<li><a href="http://beanstalkapp.com/terms-of-service">Terms of Service</a></li>
+	</ul>
+	<p>&copy; <a href="http://wildbit.com/">Wildbit, <abbr>LLC</abbr></a>, 2007-2019. All rights reserved. The Beanstalk logo and name are trademarks of Wildbit, <abbr>LLC</abbr>.</p>
+
+</footer>
+
+<!-- JS -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script src="../javascripts/bundle.min.js"></script>
+
+<!-- Tweet -->
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</body>
+</html>`dì8b!      ^ì7^ì8AË|5^õ=·   A    :http://guides.beanstalkapp.com/version-control/git-on-linux.html necko:classified 1 strongly-framed 1 request-method GET response-head HTTP/1.1 200 OK
+x-amz-id-2: xS2PItVjjS3Jr+rEBjj2RdXdUPG3BQsQIVxqA10JuuaP2qvA2Mbsuo7rEspqcZXQEKNHUjT/hJI=
+x-amz-request-id: 5216FBCBBA50B68D
+Date: Fri, 19 Jun 2020 00:13:44 GMT
+Last-Modified: Mon, 28 Oct 2019 20:02:10 GMT
+ETag: "b710f0bbf41a721a291fb19fd45cfc1b"
+Content-Type: text/html
+Content-Length: 12073
+Server: AmazonS3
+ original-response-headers x-amz-id-2: xS2PItVjjS3Jr+rEBjj2RdXdUPG3BQsQIVxqA10JuuaP2qvA2Mbsuo7rEspqcZXQEKNHUjT/hJI=
+x-amz-request-id: 5216FBCBBA50B68D
+Date: Fri, 19 Jun 2020 00:13:44 GMT
+Last-Modified: Mon, 28 Oct 2019 20:02:10 GMT
+ETag: "b710f0bbf41a721a291fb19fd45cfc1b"
+Content-Type: text/html
+Content-Length: 12073
+Server: AmazonS3
+ ctid 1 eTLD1Access 1;0;1517748388, uncompressed-len 0 net-response-time-onstart 269 net-response-time-onstop 271 predictor::resource-count 34 predictor::http://guides.beanstalkapp.com/stylesheets/global.css 1,1,1592525623,4097 predictor::http://use.typekit.net/ahh5why.js 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/version-control/git-on-linux/ssh-key-bs.png 1,1,1592525623,4097 predictor::http://guides.beanstalkapp.com/images/profiles/rthompson.jpg 1,1,1592525623,4097 predictor::http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/javascripts/bundle.min.js 1,1,1592525623,4097 predictor::http://platform.twitter.com/widgets.js 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-head-pattern.png 1,1,1592525623,4096 predictor::http://www.googletagmanager.com/gtm.js?id=GTM-PXZVN2 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/logo-sml.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/i-nav.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-version-control.gif 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-page-top.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/i-back.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-support.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-support-wrap.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-support-sections.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/i-support.png 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/bg-footer.png 1,1,1592525623,4096 predictor::http://connect.facebook.net/en_US/all.js#xfbml=1 1,1,1592525623,4096 predictor::https://use.typekit.net/af/6688bf/0000000000000000000141c7/27/l?subset_id=2&fvd=n6&v=3 1,1,1592525623,4096 predictor::https://use.typekit.net/af/1350a7/0000000000000000000141c5/27/l?subset_id=2&fvd=n4&v=3 1,1,1592525623,4096 predictor::http://guides.beanstalkapp.com/images/b-toc-switcher.png 1,1,1592525623,4096 predictor::https://p.typekit.net/p.gif?s=1&k=ahh5why&ht=tk&h=guides.beanstalkapp.com&f=83.88&a=280944&js=1.19.2&app=typekit&e=js&_=1592525624030 1,1,1592525623,4096 predictor::https://platform.twitter.com/js/button.660a9fead67f97981c42cfef39d63eda.js 1,1,1592525623,4096 predictor::http://www.google-analytics.com/analytics.js 1,1,1592525623,4096 predictor::https://connect.facebook.net/en_US/fbevents.js 1,1,1592525623,4096 predictor::https://connect.facebook.net/en_US/all.js?hash=155194d99fa0da15e6bc0862d97a3ae0 1,1,1592525623,4096 predictor::http://www.google-analytics.com/plugins/ua/linkid.js 1,1,1592525623,4096 predictor::https://connect.facebook.net/signals/config/295344307493628?v=2.9.18&r=stable 1,1,1592525623,4096 predictor::http://www.google-analytics.com/collect?v=1&_v=j83&aip=1&a=1234447125&t=pageview&_s=1&dl=http%3A%2F%2Fguides.beanstalkapp.com%2Fversion-control%2Fgit-on-linux.html&dr=https%3A%2F%2Fwww.google.com%2F&ul=en-us&de=UTF-8&dt=Working%20with%20Git%20on%20Linux%20%C2%A0%E2%80%A2%C2%A0%20Beanstalk%20Guides&sd=24-bit&sr=1904x815&vp=1268x630&je=0&_u=aGBAgEAj~&jid=1443319352&gjid=984639550&cid=579195687.1592525624&tid=UA-507677-35&_gid=1220315256.1592525624&gtm=2wg6a0PXZVN2&cd1=http&z=1523379346 1,1,1592525623,4096 predictor::https://stats.g.doubleclick.net/r/collect?t=dc&aip=1&_r=3&v=1&_v=j83&tid=UA-507677-35&cid=579195687.1592525624&jid=1443319352&gjid=984639550&_gid=1220315256.1592525624&_u=aGBAgEAj~&z=1222012699 1,1,1592525623,4096 predictor::https://stats.g.doubleclick.net/r/collect?t=dc&aip=1&_r=3&v=1&_v=j83&tid=UA-507677-19&cid=579195687.1592525624&jid=561430493&gjid=1390000346&_gid=1220315256.1592525624&_u=aGHAiEAjB~&z=66924489 1,1,1592525623,4096 predictor::https://www.facebook.com/tr/?id=295344307493628&ev=PageView&dl=http%3A%2F%2Fguides.beanstalkapp.com%2Fversion-control%2Fgit-on-linux.html&rl=https%3A%2F%2Fwww.google.com%2F&if=false&ts=1592525624635&sw=1904&sh=815&v=2.9.18&r=stable&ec=0&o=30&fbp=fb.1.1592525624632.477566559&it=1592525624324&coo=false&rqm=GET 1,1,1592525623,4096   /)

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///tmp/mozilla_CORP%5Cpgaddam0/google-chrome-stable_current_amd64.deb" added="2020-06-18T16:58:38Z" modified="2020-06-18T16:58:38Z" visited="2020-06-18T16:58:38Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-06-18T16:58:38Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Downloads/workspacesclient_amd64.deb" added="2020-06-18T18:21:03Z" modified="2020-06-18T18:21:03Z" visited="2020-06-18T18:21:03Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-06-18T18:21:03Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Downloads/workspacesclient_amd64(1).deb" added="2020-06-18T18:22:13Z" modified="2020-06-18T18:22:13Z" visited="2020-06-18T18:22:13Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/vnd.debian.binary-package"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-06-18T18:22:13Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/mygit/sudo%20git%20ls" added="2020-06-18T21:31:58Z" modified="2020-06-18T21:42:26Z" visited="2020-06-18T21:31:58Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>pluma</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Pluma" exec="&apos;pluma %u&apos;" modified="2020-06-18T21:42:26Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Downloads/SWTM-2088_Atlassian-Git-Cheatsheet.pdf" added="2020-06-18T22:15:45Z" modified="2020-06-18T22:15:45Z" visited="2020-06-18T22:15:45Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/pdf"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-06-18T22:15:45Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///tmp/mozilla_CORP%5Cpgaddam0/eclipse-inst-linux64.tar.gz" added="2020-06-18T22:53:14Z" modified="2020-06-18T22:53:14Z" visited="2020-06-18T22:53:15Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-compressed-tar"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-06-18T22:53:14Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Downloads/eclipse-inst-linux64.tar.gz" added="2020-06-18T23:44:46Z" modified="2020-06-18T23:44:46Z" visited="2020-06-18T23:44:46Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-compressed-tar"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2020-06-18T23:44:46Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Downloads/eclipse" added="2020-06-18T23:46:57Z" modified="2020-06-18T23:46:57Z" visited="2020-06-18T23:46:58Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:applications>
+          <bookmark:application name="Engrampa" exec="&apos;engrampa %u&apos;" modified="2020-06-18T23:46:57Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/mygit/case-management" added="2020-06-18T23:55:14Z" modified="2020-06-18T23:55:14Z" visited="2020-06-18T23:55:14Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:applications>
+          <bookmark:application name="Eclipse" exec="&apos;Eclipse %u&apos;" modified="2020-06-18T23:55:14Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/mygit/samplejavaprj" added="2020-06-19T00:23:08Z" modified="2020-06-19T00:23:08Z" visited="2020-06-19T00:23:08Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="inode/directory"/>
+        <bookmark:applications>
+          <bookmark:application name="Eclipse" exec="&apos;Eclipse %u&apos;" modified="2020-06-19T00:23:08Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Desktop/HelloWorld.java" added="2020-06-19T02:08:07Z" modified="2020-06-19T02:08:08Z" visited="2020-06-19T02:08:08Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>pluma</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Caja" exec="&apos;pluma %U&apos;" modified="2020-06-19T02:08:07Z" count="1"/>
+          <bookmark:application name="Pluma" exec="&apos;pluma %u&apos;" modified="2020-06-19T02:08:08Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/pgaddam/Desktop/HelloPriya.java" added="2020-06-19T02:08:30Z" modified="2020-06-19T02:25:46Z" visited="2020-06-19T02:08:30Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-java"/>
+        <bookmark:groups>
+          <bookmark:group>pluma</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Pluma" exec="&apos;pluma %u&apos;" modified="2020-06-19T02:11:57Z" count="2"/>
+          <bookmark:application name="Eclipse" exec="&apos;Eclipse %u&apos;" modified="2020-06-19T02:25:46Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

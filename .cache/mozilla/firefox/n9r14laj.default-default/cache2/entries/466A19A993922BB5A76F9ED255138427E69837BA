@@ -1,0 +1,563 @@
+/*!
+ * jQuery Internationalization library
+ *
+ * Copyright (C) 2012 Santhosh Thottingal
+ *
+ * jquery.i18n is dual licensed GPLv2 or later and MIT. You don't have to do
+ * anything special to choose one license or the other and you don't have to
+ * notify anyone which license you are using. You are free to use
+ * UniversalLanguageSelector in commercial projects as long as the copyright
+ * header is left intact. See files GPL-LICENSE and MIT-LICENSE for details.
+ *
+ * @licence GNU General Public Licence 2.0 or later
+ * @licence MIT License
+ */
+
+( function ( $ ) {
+	'use strict';
+
+	var nav, I18N,
+		slice = Array.prototype.slice;
+	/**
+	 * @constructor
+	 * @param {Object} options
+	 */
+	I18N = function ( options ) {
+		// Load defaults
+		this.options = $.extend( {}, I18N.defaults, options );
+
+		this.parser = this.options.parser;
+		this.locale = this.options.locale;
+		this.messageStore = this.options.messageStore;
+		this.languages = {};
+
+		this.init();
+	};
+
+	I18N.prototype = {
+		/**
+		 * Initialize by loading locales and setting up
+		 * String.prototype.toLocaleString and String.locale.
+		 */
+		init: function () {
+			var i18n = this;
+
+			// Set locale of String environment
+			String.locale = i18n.locale;
+
+			// Override String.localeString method
+			String.prototype.toLocaleString = function () {
+				var localeParts, localePartIndex, value, locale, fallbackIndex,
+					tryingLocale, message;
+
+				value = this.valueOf();
+				locale = i18n.locale;
+				fallbackIndex = 0;
+
+				while ( locale ) {
+					// Iterate through locales starting at most-specific until
+					// localization is found. As in fi-Latn-FI, fi-Latn and fi.
+					localeParts = locale.split( '-' );
+					localePartIndex = localeParts.length;
+
+					do {
+						tryingLocale = localeParts.slice( 0, localePartIndex ).join( '-' );
+						message = i18n.messageStore.get( tryingLocale, value );
+
+						if ( message ) {
+							return message;
+						}
+
+						localePartIndex--;
+					} while ( localePartIndex );
+
+					if ( locale === 'en' ) {
+						break;
+					}
+
+					locale = ( $.i18n.fallbacks[ i18n.locale ] && $.i18n.fallbacks[ i18n.locale ][ fallbackIndex ] ) ||
+						i18n.options.fallbackLocale;
+					$.i18n.log( 'Trying fallback locale for ' + i18n.locale + ': ' + locale );
+
+					fallbackIndex++;
+				}
+
+				// key not found
+				return '';
+			};
+		},
+
+		/*
+		 * Destroy the i18n instance.
+		 */
+		destroy: function () {
+			$.removeData( document, 'i18n' );
+		},
+
+		/**
+		 * General message loading API This can take a URL string for
+		 * the json formatted messages. Example:
+		 * <code>load('path/to/all_localizations.json');</code>
+		 *
+		 * To load a localization file for a locale:
+		 * <code>
+		 * load('path/to/de-messages.json', 'de' );
+		 * </code>
+		 *
+		 * To load a localization file from a directory:
+		 * <code>
+		 * load('path/to/i18n/directory', 'de' );
+		 * </code>
+		 * The above method has the advantage of fallback resolution.
+		 * ie, it will automatically load the fallback locales for de.
+		 * For most usecases, this is the recommended method.
+		 * It is optional to have trailing slash at end.
+		 *
+		 * A data object containing message key- message translation mappings
+		 * can also be passed. Example:
+		 * <code>
+		 * load( { 'hello' : 'Hello' }, optionalLocale );
+		 * </code>
+		 *
+		 * A source map containing key-value pair of languagename and locations
+		 * can also be passed. Example:
+		 * <code>
+		 * load( {
+		 * bn: 'i18n/bn.json',
+		 * he: 'i18n/he.json',
+		 * en: 'i18n/en.json'
+		 * } )
+		 * </code>
+		 *
+		 * If the data argument is null/undefined/false,
+		 * all cached messages for the i18n instance will get reset.
+		 *
+		 * @param {string|Object} source
+		 * @param {string} locale Language tag
+		 * @return {jQuery.Promise}
+		 */
+		load: function ( source, locale ) {
+			var fallbackLocales, locIndex, fallbackLocale, sourceMap = {};
+			if ( !source && !locale ) {
+				source = 'i18n/' + $.i18n().locale + '.json';
+				locale = $.i18n().locale;
+			}
+			if ( typeof source === 'string' &&
+				source.split( '.' ).pop() !== 'json'
+			) {
+				// Load specified locale then check for fallbacks when directory is specified in load()
+				sourceMap[ locale ] = source + '/' + locale + '.json';
+				fallbackLocales = ( $.i18n.fallbacks[ locale ] || [] )
+					.concat( this.options.fallbackLocale );
+				for ( locIndex in fallbackLocales ) {
+					fallbackLocale = fallbackLocales[ locIndex ];
+					sourceMap[ fallbackLocale ] = source + '/' + fallbackLocale + '.json';
+				}
+				return this.load( sourceMap );
+			} else {
+				return this.messageStore.load( source, locale );
+			}
+
+		},
+
+		/**
+		 * Does parameter and magic word substitution.
+		 *
+		 * @param {string} key Message key
+		 * @param {Array} parameters Message parameters
+		 * @return {string}
+		 */
+		parse: function ( key, parameters ) {
+			var message = key.toLocaleString();
+			// FIXME: This changes the state of the I18N object,
+			// should probably not change the 'this.parser' but just
+			// pass it to the parser.
+			this.parser.language = $.i18n.languages[ $.i18n().locale ] || $.i18n.languages[ 'default' ];
+			if ( message === '' ) {
+				message = key;
+			}
+			return this.parser.parse( message, parameters );
+		}
+	};
+
+	/**
+	 * Process a message from the $.I18N instance
+	 * for the current document, stored in jQuery.data(document).
+	 *
+	 * @param {string} key Key of the message.
+	 * @param {string} param1 [param...] Variadic list of parameters for {key}.
+	 * @return {string|$.I18N} Parsed message, or if no key was given
+	 * the instance of $.I18N is returned.
+	 */
+	$.i18n = function ( key, param1 ) {
+		var parameters,
+			i18n = $.data( document, 'i18n' ),
+			options = typeof key === 'object' && key;
+
+		// If the locale option for this call is different then the setup so far,
+		// update it automatically. This doesn't just change the context for this
+		// call but for all future call as well.
+		// If there is no i18n setup yet, don't do this. It will be taken care of
+		// by the `new I18N` construction below.
+		// NOTE: It should only change language for this one call.
+		// Then cache instances of I18N somewhere.
+		if ( options && options.locale && i18n && i18n.locale !== options.locale ) {
+			String.locale = i18n.locale = options.locale;
+		}
+
+		if ( !i18n ) {
+			i18n = new I18N( options );
+			$.data( document, 'i18n', i18n );
+		}
+
+		if ( typeof key === 'string' ) {
+			if ( param1 !== undefined ) {
+				parameters = slice.call( arguments, 1 );
+			} else {
+				parameters = [];
+			}
+
+			return i18n.parse( key, parameters );
+		} else {
+			// FIXME: remove this feature/bug.
+			return i18n;
+		}
+	};
+
+	$.fn.i18n = function () {
+		var i18n = $.data( document, 'i18n' );
+
+		if ( !i18n ) {
+			i18n = new I18N();
+			$.data( document, 'i18n', i18n );
+		}
+		String.locale = i18n.locale;
+		return this.each( function () {
+			var $this = $( this ),
+				messageKey = $this.data( 'i18n' ),
+				lBracket, rBracket, type, key;
+
+			if ( messageKey ) {
+				lBracket = messageKey.indexOf( '[' );
+				rBracket = messageKey.indexOf( ']' );
+				if ( lBracket !== -1 && rBracket !== -1 && lBracket < rBracket ) {
+					type = messageKey.slice( lBracket + 1, rBracket );
+					key = messageKey.slice( rBracket + 1 );
+					if ( type === 'html' ) {
+						$this.html( i18n.parse( key ) );
+					} else {
+						$this.attr( type, i18n.parse( key ) );
+					}
+				} else {
+					$this.text( i18n.parse( messageKey ) );
+				}
+			} else {
+				$this.find( '[data-i18n]' ).i18n();
+			}
+		} );
+	};
+
+	String.locale = String.locale || $( 'html' ).attr( 'lang' );
+
+	if ( !String.locale ) {
+		if ( typeof window.navigator !== undefined ) {
+			nav = window.navigator;
+			String.locale = nav.language || nav.userLanguage || '';
+		} else {
+			String.locale = '';
+		}
+	}
+
+	$.i18n.languages = {};
+	$.i18n.messageStore = $.i18n.messageStore || {};
+	$.i18n.parser = {
+		// The default parser only handles variable substitution
+		parse: function ( message, parameters ) {
+			return message.replace( /\$(\d+)/g, function ( str, match ) {
+				var index = parseInt( match, 10 ) - 1;
+				return parameters[ index ] !== undefined ? parameters[ index ] : '$' + match;
+			} );
+		},
+		emitter: {}
+	};
+	$.i18n.fallbacks = {};
+	$.i18n.debug = false;
+	$.i18n.log = function ( /* arguments */ ) {
+		if ( window.console && $.i18n.debug ) {
+			window.console.log.apply( window.console, arguments );
+		}
+	};
+	/* Static members */
+	I18N.defaults = {
+		locale: String.locale,
+		fallbackLocale: 'en',
+		parser: $.i18n.parser,
+		messageStore: $.i18n.messageStore
+	};
+
+	// Expose constructor
+	$.i18n.constructor = I18N;
+}( jQuery ) );
+
+;/*!
+ * jQuery Internationalization library - Message Store
+ *
+ * Copyright (C) 2012 Santhosh Thottingal
+ *
+ * jquery.i18n is dual licensed GPLv2 or later and MIT. You don't have to do anything special to
+ * choose one license or the other and you don't have to notify anyone which license you are using.
+ * You are free to use UniversalLanguageSelector in commercial projects as long as the copyright
+ * header is left intact. See files GPL-LICENSE and MIT-LICENSE for details.
+ *
+ * @licence GNU General Public Licence 2.0 or later
+ * @licence MIT License
+ */
+
+( function ( $, window, undefined ) {
+	'use strict';
+
+	var MessageStore = function () {
+		this.messages = {};
+		this.sources = {};
+	};
+
+	/**
+	 * See https://github.com/wikimedia/jquery.i18n/wiki/Specification#wiki-Message_File_Loading
+	 */
+	MessageStore.prototype = {
+
+		/**
+		 * General message loading API This can take a URL string for
+		 * the json formatted messages.
+		 * <code>load('path/to/all_localizations.json');</code>
+		 *
+		 * This can also load a localization file for a locale <code>
+		 * load( 'path/to/de-messages.json', 'de' );
+		 * </code>
+		 * A data object containing message key- message translation mappings
+		 * can also be passed Eg:
+		 * <code>
+		 * load( { 'hello' : 'Hello' }, optionalLocale );
+		 * </code> If the data argument is
+		 * null/undefined/false,
+		 * all cached messages for the i18n instance will get reset.
+		 *
+		 * @param {string|Object} source
+		 * @param {string} locale Language tag
+		 * @return {jQuery.Promise}
+		 */
+		load: function ( source, locale ) {
+			var key = null,
+				deferred = null,
+				deferreds = [],
+				messageStore = this;
+
+			if ( typeof source === 'string' ) {
+				// This is a URL to the messages file.
+				$.i18n.log( 'Loading messages from: ' + source );
+				deferred = jsonMessageLoader( source )
+					.done( function ( localization ) {
+						messageStore.set( locale, localization );
+					} );
+
+				return deferred.promise();
+			}
+
+			if ( locale ) {
+				// source is an key-value pair of messages for given locale
+				messageStore.set( locale, source );
+
+				return $.Deferred().resolve();
+			} else {
+				// source is a key-value pair of locales and their source
+				for ( key in source ) {
+					if ( Object.prototype.hasOwnProperty.call( source, key ) ) {
+						locale = key;
+						// No {locale} given, assume data is a group of languages,
+						// call this function again for each language.
+						deferreds.push( messageStore.load( source[ key ], locale ) );
+					}
+				}
+				return $.when.apply( $, deferreds );
+			}
+
+		},
+
+		/**
+		 * Set messages to the given locale.
+		 * If locale exists, add messages to the locale.
+		 *
+		 * @param {string} locale
+		 * @param {Object} messages
+		 */
+		set: function ( locale, messages ) {
+			if ( !this.messages[ locale ] ) {
+				this.messages[ locale ] = messages;
+			} else {
+				this.messages[ locale ] = $.extend( this.messages[ locale ], messages );
+			}
+		},
+
+		/**
+		 *
+		 * @param {string} locale
+		 * @param {string} messageKey
+		 * @return {boolean}
+		 */
+		get: function ( locale, messageKey ) {
+			return this.messages[ locale ] && this.messages[ locale ][ messageKey ];
+		}
+	};
+
+	function jsonMessageLoader( url ) {
+		var deferred = $.Deferred();
+
+		$.getJSON( url )
+			.done( deferred.resolve )
+			.fail( function ( jqxhr, settings, exception ) {
+				$.i18n.log( 'Error in loading messages from ' + url + ' Exception: ' + exception );
+				// Ignore 404 exception, because we are handling fallabacks explicitly
+				deferred.resolve();
+			} );
+
+		return deferred.promise();
+	}
+
+	$.extend( $.i18n.messageStore, new MessageStore() );
+}( jQuery, window ) );
+
+;var i18n_ready = $.Deferred();
+
+$(document).ready(function() {
+
+  $("#header").load("header.html", function() { 
+    $("#languages").change(function () {
+        var lang = $("#languages").val();
+        console.log(lang);
+        setLanguage(lang);  
+    });
+    $("#"+getPageName()).hide();
+  }); 
+  $("#footer").load("footer.html"); 
+    
+  var getLanguage = function() {
+    var supportedLanguages = ['en', 'fr'];
+    var language = readCookie("language");
+    // cookie is present and valid - use it
+    if (language && supportedLanguages.indexOf(language) >= 0) {
+        return language;
+    }
+    // use browser preferred language (if supported), or fallback to browser's UI locale (older browsers)
+    else {
+        if (window.navigator.languages) {
+            language = window.navigator.languages[0];
+        }
+        else if (window.navigator.language) {
+            language = window.navigator.language;
+        }
+        language = language.split('-')[0].toLowerCase();
+        if(supportedLanguages.indexOf(language) < 0) {
+            language = 'en';
+        }
+    }
+    return language;
+  }
+
+  var setLanguage = function(language) {
+    createCookie("language", language, 365);
+    $.i18n().locale = language;
+    update_texts();
+  }
+
+  var createCookie = function(name, value, days) {
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime()+(days*24*60*60*1000));
+      var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+  }
+
+  var readCookie = function(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
+  var getPageName = function() {
+    var url = document.location.href;
+    url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+    url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+    url = url.substring(url.lastIndexOf("/") + 1, url.length);
+    if(url.length == 0) {
+      url = "index";
+    }
+    return url.split(".")[0].toLowerCase();
+  }
+
+  var update_texts = function() {
+    // update texts
+    $('html').i18n();
+    // update titles
+    $('[data-i18n-title]').each(function() {
+        var key = $(this).attr('data-i18n-title');
+        $(this).attr('title', $.i18n(key));
+    });
+    // update alts
+    $('[data-i18n-alt]').each(function() {
+        var key = $(this).attr('data-i18n-alt');
+        $(this).attr('alt', $.i18n(key));
+    });
+    // update html
+    $('[data-i18n-html]').each(function() {
+        var key = $(this).attr('data-i18n-html');
+        $(this).html($.i18n(key));
+    });
+    // update from external html
+    $("#i18n-html-replace").load("i18n/" + getPageName() + "-" + $.i18n().locale + '.html');
+  };
+
+  $.getJSON("i18n/" + getPageName() + ".json", function(json) {
+    console.log(json); 
+    $.i18n().load(json);
+    var locale = getLanguage();
+    $.i18n().locale = locale;
+    console.log(locale);
+    $("#languages").val(locale);
+    update_texts();
+    i18n_ready.resolve();
+    $("body").show();
+  });
+  
+});
+ÖS      ^ë¹˜^ë¹˜AËI.^ôô   3    :https://clients.amazonworkspaces.com/js/i18n-ws.js necko:classified 1 strongly-framed 1 security-info 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 request-method GET response-head HTTP/1.1 200 OK
+Content-Type: application/javascript
+Content-Length: 15534
+Date: Thu, 18 Jun 2020 18:59:37 GMT
+Last-Modified: Mon, 25 Nov 2019 22:12:15 GMT
+ETag: "82c03efe52c37fc73368fef26b503afd"
+Accept-Ranges: bytes
+Server: AmazonS3
+X-Cache: Miss from cloudfront
+Via: 1.1 61bc723adb3b1884ed759711e84e13a9.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: SEA19-C2
+X-Amz-Cf-Id: GyGRceakv03KleBK81sSn7TlsAe57DwPum_ZP_OgwlonZZpHzX58JA==
+ original-response-headers Content-Type: application/javascript
+Content-Length: 15534
+Connection: keep-alive
+Date: Thu, 18 Jun 2020 18:59:37 GMT
+Last-Modified: Mon, 25 Nov 2019 22:12:15 GMT
+ETag: "82c03efe52c37fc73368fef26b503afd"
+Accept-Ranges: bytes
+Server: AmazonS3
+X-Cache: Miss from cloudfront
+Via: 1.1 61bc723adb3b1884ed759711e84e13a9.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: SEA19-C2
+X-Amz-Cf-Id: GyGRceakv03KleBK81sSn7TlsAe57DwPum_ZP_OgwlonZZpHzX58JA==
+ ctid 2 eTLD1Access 1;0;1645175795, uncompressed-len 0 net-response-time-onstart 428 net-response-time-onstop 429   <®

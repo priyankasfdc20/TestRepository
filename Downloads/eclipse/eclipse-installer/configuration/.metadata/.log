@@ -1,0 +1,30 @@
+!SESSION 2020-06-18 16:47:11.740 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_252
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -data @noDefault
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.197
+!MESSAGE Loading 'file:/home/pgaddam/.p2/org.eclipse.equinox.p2.core/cache/' failed. retry=1
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.206
+!MESSAGE Loading 'file:/home/pgaddam/.p2/org.eclipse.equinox.p2.core/cache/' failed. retry=2
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.219
+!MESSAGE Loading 'file:/home/pgaddam/.p2/org.eclipse.equinox.p2.core/cache/' failed. retry=1
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.219
+!MESSAGE Loading 'file:/home/pgaddam/.p2/org.eclipse.equinox.p2.core/cache/' failed. retry=2
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.241
+!MESSAGE Loading 'file:/home/pgaddam/.p2/pool/' failed. retry=1
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.244
+!MESSAGE Loading 'file:/home/pgaddam/.p2/pool/' failed. retry=2
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.248
+!MESSAGE Loading 'file:/home/pgaddam/.p2/pool/' failed. retry=1
+
+!ENTRY org.eclipse.equinox.p2.artifact.repository 2 0 2020-06-18 16:47:52.248
+!MESSAGE Loading 'file:/home/pgaddam/.p2/pool/' failed. retry=2

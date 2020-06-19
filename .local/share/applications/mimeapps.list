@@ -1,0 +1,4 @@
+
+[Default Applications]
+x-scheme-handler/eclipse+installer=_home_pgaddam_Downloads_eclipse_eclipse-installer_.desktop
+x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_home_pgaddam_eclipse_jee-2020-06_eclipse_.desktop

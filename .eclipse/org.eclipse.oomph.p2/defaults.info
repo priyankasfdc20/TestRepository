@@ -1,0 +1,4 @@
+#P2 clients store their default bundle pool locations here
+#Thu Jun 18 16:47:44 PDT 2020
+org.eclipse.oomph.setup.ui=/home/pgaddam/.p2/pool
+org.eclipse.oomph.setup.ui\:agent=/home/pgaddam/.p2
